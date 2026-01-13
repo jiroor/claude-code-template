@@ -178,12 +178,17 @@ paths:
 
 ### 4. サブエージェントにスキルを組み込む
 
+サブエージェントは`skills:`フィールドで専門知識を読み込めます。
+
 ```yaml
 ---
 name: my-agent
-skills: pdf-processing, docx
+description: PDF処理とドキュメント生成の専門家
+skills: pdf-processing, docx  # 起動時に完全な内容がコンテキストに注入される
 ---
 ```
+
+**注意**: SubagentsはSkillsを自動継承しません。明示的な指定が必要です。
 
 ## 機能の使い分け
 

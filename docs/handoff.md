@@ -22,18 +22,27 @@ Claude Code の5つのカスタマイズ機能（CLAUDE.md, Rules, Skills, Subag
 
 ```
 CLAUDE.md（規定する）
-    ↓
+    ↓ 方針を定める
 Rules（参照される）
-    ↓
-Skills ← Subagents（skillsフィールドで読み込み）
-    ↑
-Commands（呼び出す）
+    ↓ 詳細ルールを提供
+
+         Skills
+        (知識)
+          ▲
+          │ skills: フィールドで読み込み
+          │ （完全な内容が注入される）
+          │
+    Subagents ────────► Commands
+    (実行者)              (エントリ)
+          │                   │
+          └───────呼び出される──┘
 ```
 
+**依存関係の詳細:**
 - **CLAUDE.md**: 全機能の振る舞いを規定（呼び出しはできない）
-- **Rules**: 参照されるのみ
-- **Subagents**: Skills を `skills:` フィールドで読み込み可能
-- **Commands**: Subagents や Skills を呼び出し・参照可能
+- **Rules**: 参照されるのみ（静的な規約）
+- **Subagents → Skills**: Subagentsは`skills:`フィールドで明示的にSkillsを読み込む（自動継承はされない）
+- **Commands → Subagents/Skills**: CommandsからSubagentsやSkillsを呼び出し・参照可能
 
 ### レイヤー構造
 
